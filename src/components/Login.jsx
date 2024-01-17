@@ -71,18 +71,19 @@ const Login = ({ setIsAuthenticated, setUser }) => {
   }
 
   return (
-    <section className="bg-gray-100 flex items-center justify-center h-screen">
-      <div className="bg-gray-500">
+        <div className="bg-gradient-to-b from-purple-600 via-blue-400 to-blue-500 font-sans h-screen">
+    <section className="flex items-center justify-center h-screen">
+      <div className="bg-white bg-opacity-40 rounded-lg p-4">
         <Toaster toastOptions={{ duration: 4000 }} />
         <div id="recaptcha-container"></div>
-        <div className="w-80 flex flex-col gap-4 rounded-lg p-4">
+        <div className="w-96 flex flex-col gap-4 rounded-lg p-4">
           <h1 className="text-center leading-normal text-white font-medium text-3xl mb-6">
-            Welcome to <br /> Weather App
+            Weather App <br /> Log In using OTP
           </h1>
 
-          {isVisible ? (
+          {!isVisible ? (
             <>
-              <div className="bg-white text-emerald-500 w-fit mx-auto p-4 rounded-full">
+              <div className="bg-white text-blue-400 w-fit mx-auto p-4 rounded-full">
                 <BsFillShieldLockFill size={30} />
               </div>
               <label
@@ -110,7 +111,7 @@ const Login = ({ setIsAuthenticated, setUser }) => {
             </>
           ) : (
             <>
-              <div className="bg-white text-emerald-500 w-fit mx-auto p-4 rounded-full">
+              <div className="bg-white text-blue-400 w-fit mx-auto p-4 rounded-full">
                 <BsTelephoneFill size={30} />
               </div>
               <label
@@ -133,7 +134,8 @@ const Login = ({ setIsAuthenticated, setUser }) => {
           )}
         </div>
       </div>
-    </section>
+      </section>
+      </div>
   );
 };
 

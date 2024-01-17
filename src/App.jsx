@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
+import Search from "./components/Search";
 
 const PrivateRoute = ({ isAuthenticated, setIsAuthenticated, ...props }) => {
   return isAuthenticated ? (
@@ -25,7 +26,7 @@ const PrivateRoute = ({ isAuthenticated, setIsAuthenticated, ...props }) => {
 };
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [user, setUser] = useState(null);
 
   console.log(user);
@@ -48,6 +49,7 @@ function App() {
           }>
           <Route path="/home" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/search" element={<Search />} />
         </Route>
       </Routes>
     </BrowserRouter>

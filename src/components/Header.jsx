@@ -31,8 +31,9 @@ const Header = ({ setIsAuthenticated }) => {
             style={{ height: "50px", width: "50px" }}
           />
         </div>
-        <div className="nav-links nav-links-transition duration-500 md:static absolute bg-gray-100 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5">
-          <ul className="ml-28 flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
+
+        <div className="nav-links nav-links-transition duration-500 md:static absolute bg-gray-100 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5 justify-end">
+          <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
             <li>
               <Link to="/home" className="hover:text-primary-700">
                 Home
@@ -43,8 +44,14 @@ const Header = ({ setIsAuthenticated }) => {
                 Dashboard
               </Link>
             </li>
+            <li>
+              <Link to="/search" className="hover:text-primary-700">
+                Search
+              </Link>
+            </li>
           </ul>
         </div>
+
         <div className="flex items-center gap-6">
           <div className="flex items-center lg:order-2">
             <div className="mt-1 text-inherit cursor-pointer">

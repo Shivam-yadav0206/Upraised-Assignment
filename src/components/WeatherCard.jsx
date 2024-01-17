@@ -4,8 +4,8 @@ const WeatherCard = ({ info }) => {
     const { name,main, wind,sys } = info;
     
   return (
-    <div className="flex items-center justify-center ">
-      <div className="flex flex-col bg-white rounded p-4 w-full max-w-xs">
+    <div className="flex items-center justify-center mt-2 ">
+      <div className="border-solid border-2 border-black flex flex-col bg-white rounded p-4 w-full max-w-xs">
         <div className="font-bold text-xl">
           {name}, {sys.country}
         </div>
