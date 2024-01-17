@@ -71,71 +71,75 @@ const Login = ({ setIsAuthenticated, setUser }) => {
   }
 
   return (
-        <div className="bg-gradient-to-b from-purple-600 via-blue-400 to-blue-500 font-sans h-screen">
-    <section className="flex items-center justify-center h-screen">
-      <div className="bg-white bg-opacity-40 rounded-lg p-4">
-        <Toaster toastOptions={{ duration: 4000 }} />
-        <div id="recaptcha-container"></div>
-        <div className="w-96 flex flex-col gap-4 rounded-lg p-4">
-          <h1 className="text-center leading-normal text-white font-medium text-3xl mb-6">
-            Weather App <br /> Log In using OTP
-          </h1>
+    <div className="bg-gradient-to-b from-purple-600 via-blue-400 to-blue-500 font-sans h-screen">
+      <section className="flex items-center justify-center h-screen">
+        <div className="bg-white bg-opacity-40 rounded-lg p-4">
+          <Toaster toastOptions={{ duration: 4000 }} />
+          <div id="recaptcha-container"></div>
+          <div className="w-96 flex flex-col gap-4 rounded-lg p-4">
+            <h1 className="text-center leading-normal text-white font-medium text-3xl mb-6">
+              Weather App <br /> Log In using OTP
+            </h1>
 
-          {!isVisible ? (
-            <>
-              <div className="bg-white text-blue-400 w-fit mx-auto p-4 rounded-full">
-                <BsFillShieldLockFill size={30} />
-              </div>
-              <label
-                htmlFor="otp"
-                className="font-bold text-2xl text-white text-center">
-                Enter Your OTP
-              </label>
-              <OtpInput
-                OTPLength={6}
-                otpType="number"
-                disabled={false}
-                autoFocus
-                className="otp-container text-black"
-                value={code}
-                onChange={setCode}
-              />
-              <button
-                onClick={onOTPVerify}
-                className="bg-black w-full flex gap-1 items-center justify-center py-2.5 text-white rounded-lg">
-                {loading && (
-                  <CgSpinner size={20} className="mt-1 animate-spin" />
-                )}
-                <span>Verify OTP</span>
-              </button>
-            </>
-          ) : (
-            <>
-              <div className="bg-white text-blue-400 w-fit mx-auto p-4 rounded-full">
-                <BsTelephoneFill size={30} />
-              </div>
-              <label
-                htmlFor="ph"
-                className="font-bold text-xl text-white text-center">
-                Verify your phone number
-              </label>
+            {isVisible ? (
+              <>
+                <div className="bg-white text-blue-400 w-fit mx-auto p-4 rounded-full">
+                  <BsFillShieldLockFill size={30} />
+                </div>
+                <label
+                  htmlFor="otp"
+                  className="font-bold text-2xl text-white text-center">
+                  Enter Your OTP
+                </label>
+                <OtpInput
+                  OTPLength={6}
+                  otpType="number"
+                  disabled={false}
+                  autoFocus
+                  className="otp-container text-black"
+                  value={code}
+                  onChange={setCode}
+                />
+                <button
+                  onClick={onOTPVerify}
+                  className="bg-black w-full flex gap-1 items-center justify-center py-2.5 text-white rounded-lg">
+                  {loading && (
+                    <CgSpinner size={20} className="mt-1 animate-spin" />
+                  )}
+                  <span>Verify OTP</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <div className="bg-white text-blue-400 w-fit mx-auto p-4 rounded-full">
+                  <BsTelephoneFill size={30} />
+                </div>
+                <label
+                  htmlFor="ph"
+                  className="font-bold text-xl text-white text-center">
+                  Verify your phone number
+                </label>
 
-              <PhoneInput country={"in"} value={number} onChange={setNumber} />
+                <PhoneInput
+                  country={"in"}
+                  value={number}
+                  onChange={setNumber}
+                />
 
-              <button
-                onClick={onSignup}
-                className="bg-black w-full flex gap-1 items-center justify-center py-2.5 text-white rounded-lg">
-                {loading && (
-                  <CgSpinner size={20} className="mt-1 animate-spin" />
-                )}
-                <span>Send code via SMS</span>
-              </button>
-            </>
-          )}
+                <button
+                  onClick={onSignup}
+                  className="bg-black w-full flex gap-1 items-center justify-center py-2.5 text-white rounded-lg">
+                  {loading && (
+                    <CgSpinner size={20} className="mt-1 animate-spin" />
+                  )}
+                  <span>Send code via SMS</span>
+                </button>
+              </>
+            )}
+          </div>
         </div>
-      </div>
       </section>
-      </div>
+    </div>
   );
 };
 
