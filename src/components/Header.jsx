@@ -22,7 +22,7 @@ const Header = ({ setIsAuthenticated }) => {
   }
 
   return (
-    <header className="bg-gray-100 p-3">
+    <header className="bg-gray-100 p-1">
       <nav className="flex justify-between items-center w-[92%] mx-auto mb-2">
         <div>
           <img

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import Chart from './Chart'
+import Chart from "./Chart";
 const Dashboard = () => {
-
   const [searchText, setSearchText] = useState("");
   const [location, setLocation] = useState({});
   const [weatherData, setWeatherData] = useState(null);
@@ -14,11 +13,11 @@ const Dashboard = () => {
     });
     const url = `https://api.openweathermap.org/data/2.5/forecast?${params}`;
     try {
-      console.log(location.lat, location.lon)
+      console.log(location.lat, location.lon);
       const response = await fetch(url);
       const result = await response.json();
       console.log(result);
-      setWeatherData(result.list);
+      setWeatherData(result.list.slice(0, 5));
     } catch (error) {
       console.error(error);
     }
@@ -47,11 +46,11 @@ const Dashboard = () => {
     fetchLocation();
   }, []);
 
-    useEffect(() => {
-      if (location.lat && location.lon) {
-        getWeatherData();
-      }
-    }, [location]);
+  useEffect(() => {
+    if (location.lat && location.lon) {
+      getWeatherData();
+    }
+  }, [location]);
 
   return (
     <div className="my-5">
@@ -110,6 +109,6 @@ const Dashboard = () => {
       <Chart data={weatherData} />
     </div>
   );
-}
+};
 
 export default Dashboard;

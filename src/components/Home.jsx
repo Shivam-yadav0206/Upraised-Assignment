@@ -3,6 +3,7 @@ import { City, Country, State } from "country-state-city";
 import Selector from "./Selector";
 import { Link } from "react-router-dom";
 import WeatherCard from "./WeatherCard";
+import { CgSpinner } from "react-icons/cg";
 
 const Home = () => {
   const [searchText, setSearchText] = useState("");
@@ -10,11 +11,12 @@ const Home = () => {
   const [stateData, setStateData] = useState();
   const [cityData, setCityData] = useState();
   const [cityDataVisibility, setCityDataVisibility] = useState(false);
-
+  const [loading, setLoading] = useState(false)
   const [country, setCountry] = useState(countryData[0]);
   const [state, setState] = useState();
   const [city, setCity] = useState();
   const [weatherData, setWeatherData] = useState(null);
+
 
   const getWeatherData = async (city) => {
     const params = new URLSearchParams({
@@ -23,14 +25,17 @@ const Home = () => {
     });
     const url = `https://api.openweathermap.org/data/2.5/weather?${params}`;
     try {
+      setLoading(true);
       console.log(city);
       const response = await fetch(url);
       const result = await response.json();
       console.log(result);
       setWeatherData(result);
+      setLoading(false);
       setCityDataVisibility(true);
       
     } catch (error) {
+      setLoading(false);
       console.error(error);
     }
   };
@@ -51,15 +56,10 @@ const Home = () => {
     cityData && setCity(cityData[0]);
   }, [cityData]);
   return (
-    <div className="p-2 m-2">
-      
+    <div className="">
       {/* <h1 className="text-5xl mx-auto text-center my-2 ">Or</h1> */}
       <div className="my-5 rounded-lg px-3 grid place-items-center pb-20 selection:text-white ">
         <div>
-          <h2 className="text-2xl font-bold text-teal-900 m-2 text-center">
-            Select Country, State and City
-          </h2>
-          <br />
           <div className="flex flex-wrap gap-3 bg-gray-300 rounded-lg p-8">
             <div>
               <p className="text-teal-800 font-semibold">Country :</p>
@@ -89,18 +89,30 @@ const Home = () => {
                 />
               </div>
             )}
+            <div className="text-center">
+              <button
+                onClick={() => getWeatherData(city)}
+                className="mt-7 text-white bg-gray-500 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-3 py-2 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+                {loading ? (
+                  <CgSpinner size={20} className="mt-1 animate-spin" />
+                ) : (
+                  "🔎 Search"
+                )}
+              </button>
+            </div>
           </div>
-          <div className="text-center">
-            <button
-              className="text-white bg-gray-500 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-              onClick={() => getWeatherData(city)}>
-              🔎 Search
-            </button>
-          </div>
+          {cityDataVisibility ? (
+            <div>
+              <WeatherCard info={weatherData} />
+            </div>
+          ) : (
+            <h2 className="text-2xl font-bold text-teal-900 m-2 text-center">
+              Select Country, State, and City
+            </h2>
+          )}
+          <br />
         </div>
       </div>
-
-      {cityDataVisibility && <WeatherCard info = {weatherData} />}
     </div>
   );
 };

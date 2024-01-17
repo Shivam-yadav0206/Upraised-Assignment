@@ -25,7 +25,7 @@ const PrivateRoute = ({ isAuthenticated, setIsAuthenticated, ...props }) => {
 };
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
 
   console.log(user);

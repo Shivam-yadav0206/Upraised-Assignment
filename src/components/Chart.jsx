@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
+// Function to convert Kelvin to Celsius
+const kelvinToCelsius = (kelvin) => kelvin - 273.15;
+
 const Chart = ({ data }) => {
   console.log(data);
 
@@ -28,7 +31,7 @@ const Chart = ({ data }) => {
       const y = d3
         .scaleLinear()
         .range([height, 0])
-        .domain([0, d3.max(data, (d) => d.main.temp)]);
+        .domain([0, d3.max(data, (d) => kelvinToCelsius(d.main.temp))]);
 
       svg
         .selectAll("rect")
@@ -36,9 +39,9 @@ const Chart = ({ data }) => {
         .enter()
         .append("rect")
         .attr("x", (d, i) => x(i.toString()))
-        .attr("y", (d) => y(d.main.temp))
+        .attr("y", (d) => y(kelvinToCelsius(d.main.temp)))
         .attr("width", x.bandwidth())
-        .attr("height", (d) => height - y(d.main.temp))
+        .attr("height", (d) => height - y(kelvinToCelsius(d.main.temp)))
         .attr("fill", "blue");
 
       // Add x-axis
@@ -59,7 +62,7 @@ const Chart = ({ data }) => {
   return (
     <>
       <div className="flex justify-center my-5">
-        <h1 className="block">Grouped bar chart with tooltip</h1>
+        <h1 className="block">Data of Last 5 Days</h1>
       </div>
       <div className="flex justify-center">
         <svg ref={svgRef}></svg>;
